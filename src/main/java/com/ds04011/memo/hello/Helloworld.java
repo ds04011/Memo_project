@@ -21,5 +21,12 @@ public class Helloworld {
 	public String hello() {
 		return "hello/hello.html";
 	}
+	
+	@GetMapping("/text1")
+	@ResponseBody
+	public String test() {
+		return "test";
+		
+	}
 
 }
