@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html lang="ko" 
+    xmlns:th="http://www.thymeleaf.org" 
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/default}">
+     <!-- 위가 틀 소환, 아래가 알맹이 . -->   
+		<section layout:fragment="contents" class="contents d-flex justify-content-center">
+			<div class="user-box memo-bg my-5 p-5 rounded-lg">
+				<h1 class="text-center">회원 가입</h1>
+				<input type="text" class="form-control mt-5" placeholder="아이디">
+				<input type="password" class="form-control mt-3" placeholder="password">
+				<input type="password" class="form-control mt-3" placeholder="password check">
+				<input type="text" class="form-control mt-3" placeholder="이름">
+				<input type="text" class="form-control mt-3" placeholder="이메일">
+				<button type="button" class="btn btn-secondary btn-block mt-3">Register</button>
+			</div>
+		</section>
+
+</html>
