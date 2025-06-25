@@ -8,13 +8,72 @@
 		<section layout:fragment="contents" class="contents d-flex justify-content-center">
 			<div class="user-box memo-bg my-5 p-5 rounded-lg">
 				<h1 class="text-center">회원 가입</h1>
-				<input type="text" class="form-control mt-5" placeholder="아이디">
-				<input type="password" class="form-control mt-3" placeholder="password">
-				<input type="password" class="form-control mt-3" placeholder="password check">
-				<input type="text" class="form-control mt-3" placeholder="이름">
-				<input type="text" class="form-control mt-3" placeholder="이메일">
-				<button type="button" class="btn btn-secondary btn-block mt-3">Register</button>
+				<input type="text" class="form-control mt-5" id="idInput" placeholder="아이디">
+				<input type="password" class="form-control mt-3" id="passwordInput" placeholder="password">
+				<input type="password" class="form-control mt-3 " id="passwordCheckInput" placeholder="password check">
+				<input type="text" class="form-control mt-3" id="nameInput" placeholder="이름">
+				<input type="text" class="form-control mt-3" id="emailInput" placeholder="이메일">
+				<button type="button" class="btn btn-secondary btn-block mt-3" id="joinBtn">Register</button>
 			</div>
 		</section>
+
+		<script layout:fragment="script">
+			$("#joinBtn").on("click", function(){
+				let id = $("#idInput").val();
+				let password = $("#passwordInput").val();
+				let passwordCheck = $("#passwordCheckInput").val();
+				let name = $("#nameInput").val();
+				let email = $("#emailInput").val();
+				
+				if(id==""){
+					alert("아이디를 입력하세요");
+					return;
+				}
+				if(password==""){
+					alert("비밀번호를 입력하세요");
+					return;
+				}
+				if(passwordCheck==""){
+					alert("비밀번호 확인 창에 입력하세요");
+					return;
+				}
+				if(name==""){
+					alert("이름을 입력하세요");
+					return;
+				}
+				if(email==""){
+					alert("이메일을 입력하세요");
+					return;
+				}
+				if(password != passwordCheck){
+					alert("비밀번호가 일치하지 않습니다. ");
+					return;
+				}
+				
+				
+				$.ajax({
+					type:"post"
+					, url:"/user/register"
+					, data:{"loginId":id, "password":password, "email":email, "name":name }
+					, success:function(response){
+						if(response.result == "success"){
+							location.href="/user/view/login";
+						} else{
+							alert("회원 가입 로직 실패 ");
+						}
+					} 
+					, error:function() {
+						alert("회원 가입 통신 에러");
+					}
+					
+					
+				});
+			
+				
+				
+			});
+		
+		</script>
+
 
 </html>
