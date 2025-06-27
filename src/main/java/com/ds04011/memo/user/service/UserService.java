@@ -1,9 +1,9 @@
 package com.ds04011.memo.user.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ds04011.memo.common.MD5HashingEncoder;
+import com.ds04011.memo.user.domain.User;
 import com.ds04011.memo.user.repository.UserRepository;
 
 @Service
@@ -38,6 +38,19 @@ public class UserService {
 		} else {
 			return false;
 		}
+	}
+	
+	
+	
+	public User getUser(String loginId, String password) {
+		
+		
+		String encodedPassword = MD5HashingEncoder.encode(password);
+		
+		// DB 에 저장된 상태로 조회해야지!
+		User user = userRepository.selectUser(loginId, encodedPassword);
+		
+		return user;
 	}
 
 }

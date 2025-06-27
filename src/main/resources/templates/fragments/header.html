@@ -1,4 +1,7 @@
-		<header class=" d-flex memo-bg align-items-center">
-		<h1 class="ml-4">Memo</h1>
-		
+		<header class=" d-flex memo-bg align-items-center justify-content-between">
+			<h1 class="ml-4">Memo</h1> <!-- <i class="bi bi-journal-text"></i> 아이콘? 
+			로그아웃 버튼 자체가 로그아웃 된 상태에서는 보이면 안되니까, 타임리프로 로그인 판별해서 보여줄지말지 결정 -->
+			<div class="mr-4" th:if="${session.userId != null}">
+				<span th:text="${session.userName}">유재석</span> <a href="/user/logout">로그아웃</a>
+			</div>
 		</header>
