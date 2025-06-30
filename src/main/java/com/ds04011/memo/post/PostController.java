@@ -17,5 +17,10 @@ public class PostController {
 		// 이게 워낙 많으니까, 타임리프에서 바로 사용 가능하게 함
 		return"post/list";
 	}
+	
+	@GetMapping("/create")
+	public String post() {
+		return"post/input";
+	}
 
 }

@@ -26,3 +26,8 @@ footer {
 .memo-bg {
 	background-color : #cccccc;
 }
+
+.contents > .memo-box {
+	width:800px;
+	
+}
