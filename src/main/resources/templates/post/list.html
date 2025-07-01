@@ -5,10 +5,37 @@
         
         
         <section layout:fragment="contents">
-        	<h1>메모 리스트</h1>
-        
+        	<h1 class="text-center">메모 리스트</h1>
+        	<div class=" p-5">
+	        	<table class="table text-center">
+	        		<thead>
+	        			<tr>
+	        				<th>작성번호</th>
+	        				<th>제목</th>
+	        				<th>작성 시간</th>
+	        			</tr>
+	        		</thead>
+	        		<tbody>
+	        			<tr th:each="memo, status : ${memoList}">
+	        				<td th:text="${status.count}"></td>
+	        				<td><a th:href="|/post/view/detail?id=${memo.id}|" th:text="${memo.title}"></a></td>
+	        				<td th:text="${#temporals.format(memo.createdAt, 'yyyy년 M월 d일 a h시 m분') }"></td>
+	        			</tr>
+	        		</tbody>
+	        	
+	        	</table>
+	        	<div class="d-flex justify-content-end">
+	        		<button class="btn btn-secondary" id="memoWrite">메모 쓰기</button>
+	        	</div>
+        	</div>
         </section>
         
+        <script layout:fragment="script">
+        	$("#memoWrite").on("click", function(){
+        		location.href="/post/view/create";
+        	});
+        	
+        </script>
         
         
 </html>

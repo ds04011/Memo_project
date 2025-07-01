@@ -1,0 +1,33 @@
+<html lang="ko" 
+    xmlns:th="http://www.thymeleaf.org" 
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/default}">
+        
+       
+       
+        
+        <section layout:fragment="contents" class="contents d-flex justify-content-center">
+        	<div class="memo-box my-3">
+        		<h1 class="text-center">메모 상세</h1>
+        		<input type="text" class="form-control my-2" placeholder="제목을 입력하세요" th:value="${result.title}" >
+        		<textarea class="form-control" rows="10" placeholder="내용을 입력하세요" th:text="${result.contents}">메모 내용</textarea>
+        		<img th:src="${result.imagePath}" width="400px" >
+        		
+        		<div class="d-flex justify-content-between my-4">
+        			<button class="btn btn-danger">삭제</button>
+        			<div class="d-flex ">
+	        			<a href="/post/view/list" class="btn btn-secondary mr-2">목록으로</a>
+	        			<button type = "button" class="btn btn-secondary mr-2" >수정</button>
+        			</div>
+        		</div>
+        	</div>
+        
+        
+        
+        </section>
+        
+        
+        
+        
+        
+</html>
