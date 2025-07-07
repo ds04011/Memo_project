@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@Setter
+// @Setter d이거 나중가면 삭제하는게 맞음. 
 @AllArgsConstructor                              // 모든 요소 생성자
 @NoArgsConstructor 
 @Builder(toBuilder=true) 

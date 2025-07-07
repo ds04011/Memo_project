@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,11 +38,28 @@ public class PostRestController {
 		long userId = (Long)(session.getAttribute("userId")); 
 		// 오브젝트라서 형변환 해줘야함.
 		
+		// 로그인 안되서, userId 를 세션에서 못가져오는 경우는 어떤 상황이 발생하지?
+		
 		Map<String, String> resultMap = new HashMap<>();
 		if(postService.addPost(userId, title, contents, imageFile)) {
 			resultMap.put("result", "success");
 		} else {
 			resultMap.put("result", "fail");
+		}
+		return resultMap;
+		
+	}
+	
+	@PutMapping("/update")
+	public Map<String, String> updatePost(@RequestParam("id") long id, 
+			@RequestParam("title") String title, 
+			@RequestParam("contents") String contents) {
+		
+		Map<String, String> resultMap = new HashMap<>();
+		if(postService.updatePost(id, title, contents)) {
+			resultMap.put("result",  "success");
+		} else {
+			resultMap.put("result",  "fail");
 		}
 		return resultMap;
 		

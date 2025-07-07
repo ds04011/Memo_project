@@ -7,17 +7,17 @@
        
         
         <section layout:fragment="contents" class="contents d-flex justify-content-center">
-        	<div class="memo-box my-3">
+        	<div class="memo-box my-3" th:data-id="${result.id}">
         		<h1 class="text-center">메모 상세</h1>
-        		<input type="text" class="form-control my-2" placeholder="제목을 입력하세요" th:value="${result.title}" >
-        		<textarea class="form-control" rows="10" placeholder="내용을 입력하세요" th:text="${result.contents}">메모 내용</textarea>
+        		<input type="text" class="form-control my-2" id="titleInput" placeholder="제목을 입력하세요" th:value="${result.title}" >
+        		<textarea class="form-control" rows="10" id="contentsInput" placeholder="내용을 입력하세요" th:text="${result.contents}">메모 내용</textarea>
         		<img th:src="${result.imagePath}" width="400px" >
         		
         		<div class="d-flex justify-content-between my-4">
         			<button class="btn btn-danger">삭제</button>
         			<div class="d-flex ">
 	        			<a href="/post/view/list" class="btn btn-secondary mr-2">목록으로</a>
-	        			<button type = "button" class="btn btn-secondary mr-2" >수정</button>
+	        			<button type = "button" class="btn btn-secondary mr-2" id="updateBtn">수정</button>
         			</div>
         		</div>
         	</div>
@@ -27,7 +27,45 @@
         </section>
         
         
+        <script layout:fragment="script">
+        	$("#updateBtn").on("click", function(){
+        		
+        		let title = $("#titleInput").val();
+        		let contents = $("#contentsInput").val();
+        		let id = $(".memo-box").data("id");
+        		
+        		if(title==""){
+        			alert("제목을 입력해주세요");
+        			return;
+        		}
+        		if(contents==""){
+        			alert("내용을 입력해주세요");
+        			return;
+        		}
+        		
+        		$.ajax({
+        			type:"put"
+        			, url:"/post/update"
+        			, data:{"id":id, "title":title, "contents":contents}
+        			, success:function(response){
+        				if(response.result=="success"){
+        					location.reload();
+        					
+        				} else{
+        					alert("수정 실패");
+        				}
+        				
+        			}
+        			, error:function(){
+        				alert("수정 중 통신 에러");
+        			}
+        		
+        		});
+        		
+        		
+        	});
         
+        </script>
         
         
 </html>

@@ -65,5 +65,30 @@ public class PostService {
 		}
 		
 	}
+	
+	
+	public boolean updatePost(long id, String title, String contents) {
+		
+		Optional<Post> opPost = postRepository.findById(id);
+		if(opPost.isPresent()) {
+			Post post = opPost.get();
+			
+			post = post.toBuilder()    // 수정시킬꺼니까, 덮어씌우기 
+			.title(title)
+			.contents(contents)
+			.build();
+			
+			try {
+				postRepository.save(post);  // 프라이머리 키 기준 중복되는 대상을 save 에 넣으면 수정해줌.
+				
+			} catch (PersistenceException e) {
+				return false;
+			}
+			
+		} else {
+			return false;
+		}
+		return true;
+	}
 
 }
