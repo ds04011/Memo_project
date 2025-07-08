@@ -3,6 +3,7 @@ package com.ds04011.memo.post;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ds04011.memo.post.Service.PostService;
+import com.ds04011.memo.post.domain.Post;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -62,6 +64,16 @@ public class PostRestController {
 			resultMap.put("result",  "fail");
 		}
 		return resultMap;
+		
+	}
+	
+	//삭제 할 때에는, 그 메모에 속해있는 모든 것을 제거해야함, 
+	// 이미지 폴더 밑 댓글, 등등
+	
+	@DeleteMapping("/delete")
+	public boolean deletePost(@RequestParam("id") long id) {
+		boolean result = postService.deletePost(id);
+		return result;
 		
 	}
 
